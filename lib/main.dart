@@ -4,17 +4,17 @@ import 'package:push_notification_project/config/router/app_router.dart';
 import 'package:push_notification_project/config/theme/app_theme.dart';
 import 'package:push_notification_project/presentation/notifications/notifications_bloc.dart';
 
-void main() {
-  runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => NotificationsBloc(),
-        ),
-      ],
-      child: Container(),
-    )
-  );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationsBloc.initializeFCM();
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (_) => NotificationsBloc(),
+      ),
+    ],
+    child: const MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
@@ -29,3 +29,4 @@ class MainApp extends StatelessWidget {
     );
   }
 }
+

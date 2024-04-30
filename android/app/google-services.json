@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "625186008763",
+    "project_id": "miguelcamacho-push-not",
+    "storage_bucket": "miguelcamacho-push-not.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625186008763:android:e112c79bdbf0e2c64e039e",
+        "android_client_info": {
+          "package_name": "com.example.push_notification_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4ckZklPPf52jZ5IXRl3EviT0ZyTtEXBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
