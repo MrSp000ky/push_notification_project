@@ -15,7 +15,7 @@ part of 'notifications_bloc.dart';
     notifications: notifications?? this.notifications);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [status,notifications];
 }
 
 
