@@ -12,7 +12,11 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
   NotificationsBloc() : super(const NotificationsState()) {
     on<NotificationStatusChanged>(_notificationStatusChanged);
+    //Vrificar Estado de las notificaciones
     _checkPermissionsFCM();
+
+    //Listener para notificaciones (Cuando la app este en primer plano -> Foreground)
+    _onForegroundMessage();
   }
 
    static Future<void> initializeFCM() async {
