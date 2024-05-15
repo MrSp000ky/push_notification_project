@@ -41,7 +41,6 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       NotificationReceived event, Emitter<NotificationsState> emit) {
     emit(
         state.copywith(notifications: [event.message, ...state.notifications]));
-    
   }
 
 
@@ -110,6 +109,12 @@ void _notificationStatusChanged(NotificationStatusChanged event,Emitter<Notifica
       sound: true,
     );
     add(NotificationStatusChanged(settings.authorizationStatus)); 
+  }
+
+  PushMessage? getMessageId(String pushMessageID){
+    final exit = state.notifications.any((element) => element.messageId == pushMessageID);
+    if (!exit) return null;
+    return state.notifications.firstWhere((element) => element.messageId == pushMessageID);
   }
 
 

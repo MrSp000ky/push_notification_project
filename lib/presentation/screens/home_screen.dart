@@ -17,10 +17,32 @@ class HomeScreen extends StatelessWidget {
         ],
         ),
 
-        body: const Center(
-          child: Text("Hola Mundo"),
-        ),
+        body: const _HomeView(),
 
     );
+  }
+}
+
+class _HomeView extends StatelessWidget {
+  const _HomeView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final notifications = context.watch<NotificationsBloc>().state.notifications;
+    return ListView.builder(
+      itemCount: notifications.length,
+      itemBuilder: (BuildContext context , int index) {
+        final notification = notifications[index];
+        return ListTile(
+          title: Text(notification.title),
+          subtitle: Text(notification.body),
+          leading: notification.imageUrl != null
+          ? Image.network(notification.imageUrl!)
+          :null,
+        );
+      }
+      );
   }
 }
