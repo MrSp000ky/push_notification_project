@@ -24,6 +24,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
   NotificationsBloc() : super(const NotificationsState()) {
     on<NotificationStatusChanged>(_notificationStatusChanged);
+    on<NotificationReceived>(_notificationsReceived);
     //Vrificar Estado de las notificaciones
     _checkPermissionsFCM();
 
@@ -36,6 +37,13 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       options: DefaultFirebaseOptions.currentPlatform,
     );
   }
+    void _notificationsReceived(
+      NotificationReceived event, Emitter<NotificationsState> emit) {
+    emit(
+        state.copywith(notifications: [event.message, ...state.notifications]));
+    
+  }
+
 
 
 void _notificationStatusChanged(NotificationStatusChanged event,Emitter<NotificationsState> emit){
@@ -48,8 +56,9 @@ void _notificationStatusChanged(NotificationStatusChanged event,Emitter<Notifica
     print('Message data: ${message.data}');
 
     if (message.notification != null) return; 
-    final notification = mapperRemotoMessageToEntity(message);
-    print(notification.toString());  
+    final PushMessage notification = mapperRemotoMessageToEntity(message);
+    print(notification.toString());
+    add(NotificationReceived(notification));  
   }
 
     PushMessage mapperRemotoMessageToEntity(RemoteMessage message){
